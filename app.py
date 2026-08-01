@@ -3,6 +3,7 @@ from flask import Flask
 from routes.home import home_bp
 from routes.dashboard import dashboard_bp
 from routes.search import search_bp
+from firebase.firebase_config import db
 
 app = Flask(__name__)
 
