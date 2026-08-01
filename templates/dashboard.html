@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 class="text-center mb-5">
+        Dashboard
+    </h1>
+
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <div class="card text-bg-primary mb-3">
+
+                <div class="card-body">
+
+                    <h5>Total Users</h5>
+
+                    <h2>{{ stats.total_users }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card text-bg-success mb-3">
+
+                <div class="card-body">
+
+                    <h5>Total Logs</h5>
+
+                    <h2>{{ stats.total_logs }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card text-bg-danger mb-3">
+
+                <div class="card-body">
+
+                    <h5>Duplicates</h5>
+
+                    <h2>{{ stats.duplicates }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card text-bg-warning mb-3">
+
+                <div class="card-body">
+
+                    <h5>False Positives</h5>
+
+                    <h2>{{ stats.false_positive }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr class="my-5">
+
+    <h3 class="mb-4">
+        Recent Activity
+    </h3>
+
+    <div class="table-responsive">
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Message</th>
+                    <th>Date & Time</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for log in recent_logs %}
+
+                <tr>
+
+                    <td>{{ log.full_name }}</td>
+
+                    <td>{{ log.email }}</td>
+
+                    <td>
+
+                        {% if log.status == "UNIQUE" %}
+
+                            <span class="badge bg-success">
+                                {{ log.status }}
+                            </span>
+
+                        {% elif log.status == "DUPLICATE" %}
+
+                            <span class="badge bg-danger">
+                                {{ log.status }}
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-warning text-dark">
+                                {{ log.status }}
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>{{ log.message }}</td>
+
+                    <td>{{ log.submitted_at }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="text-center mt-4">
+
+        <a href="/" class="btn btn-primary">
+            Back to Home
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

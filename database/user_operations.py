@@ -8,17 +8,17 @@ def check_duplicate(email, phone):
     cursor = connection.cursor()
 
     query = """
-    SELECT *
+    SELECT COUNT(*)
     FROM users
     WHERE email = %s
-    OR phone = %s
+       OR phone = %s
     """
 
     cursor.execute(query, (email, phone))
 
-    existing_user = cursor.fetchone()
+    count = cursor.fetchone()[0]
 
     cursor.close()
     connection.close()
 
-    return existing_user
+    return count > 0

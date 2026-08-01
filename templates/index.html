@@ -1,148 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
 
-    <title>Data Redundancy Removal System</title>
+{% block title %}
+Cloud-Based Data Redundancy Removal System
+{% endblock %}
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+{% block content %}
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+<div class="container mt-5">
 
-<body>
+    <div class="card shadow">
 
-    <!-- Navbar -->
+        <div class="card-body">
 
-    <nav class="navbar navbar-dark bg-primary">
+            <h2 class="text-center mb-4">
+                Cloud-Based Duplicate Detection
+            </h2>
 
-        <div class="container">
+            <p class="text-center text-muted">
+                Enter user information below.
+            </p>
 
-            <span class="navbar-brand mb-0 h1">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
 
-                Data Redundancy Removal System
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
 
-            </span>
-
-        </div>
-
-    </nav>
-
-
-    <div class="container mt-5">
-
-        <div class="card shadow">
-
-            <div class="card-body">
-
-                <h2 class="text-center mb-4">
-
-                    Cloud-Based Duplicate Detection
-
-                </h2>
-
-                <p class="text-center text-muted">
-
-                    Enter user information below.
-
-                </p>
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-
-        <div class="alert alert-{{ category }} alert-dismissible fade show">
-
-            {{ message }}
-
-            <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert">
-            </button>
-
-        </div>
-
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-                <form action="/submit" method="POST">
-
-                    <div class="mb-3">
-
-                        <label class="form-label">
-
-                            Full Name
-
-                        </label>
-
-                        <input
-    type="text"
-    class="form-control"
-    name="full_name"
-    placeholder="Enter Full Name"
-    required>
-
-                    </div>
-
-
-                    <div class="mb-3">
-
-                        <label class="form-label">
-
-                            Email Address
-
-                        </label>
-
-                        <input
-    type="email"
-    class="form-control"
-    name="email"
-    placeholder="Enter Email"
-    required>
-
-                    </div>
-
-
-                    <div class="mb-3">
-
-                        <label class="form-label">
-
-                            Phone Number
-
-                        </label>
-
-                        <input
-    type="text"
-    class="form-control"
-    name="phone"
-    placeholder="Enter Phone Number"
-    required>
-
-                    </div>
-
-
-                    <div class="d-grid">
+                        {{ message }}
 
                         <button
-                            class="btn btn-primary btn-lg">
-
-                            Submit Data
-
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert">
                         </button>
 
                     </div>
 
-                </form>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
 
-            </div>
+            <form action="/submit" method="POST">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="full_name"
+                        value="{{ full_name }}"
+                        required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        value="{{ email }}"
+                        required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        class="form-control"
+                        name="phone"
+                        value="{{ phone }}"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                        required>
+
+                </div>
+
+                <div class="d-grid">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-lg">
+
+                        Submit Data
+
+                    </button>
+
+                </div>
+
+            </form>
 
         </div>
 
     </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
-</html>
+</div>
+
+{% endblock %}

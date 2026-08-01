@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+        <div class="container">
+
+            <!-- Project Title -->
+            <a class="navbar-brand fw-bold"
+               href="/">
+
+                Cloud-Based Data Redundancy Removal System
+
+            </a>
+
+            <!-- Mobile Menu -->
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <!-- Right Side Navigation -->
+            <div class="collapse navbar-collapse justify-content-end"
+                 id="navbarNav">
+
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+
+                        <a class="nav-link"
+                           href="/">
+
+                            Home
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link"
+                           href="/dashboard">
+
+                            Dashboard
+
+                        </a>
+
+                    </li>
+
+                    <!-- <li class="nav-item">
+
+                        <a class="nav-link"
+                           href="/about">
+
+                            About
+
+                        </a>
+
+                    </li> -->
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container mt-4">
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+
+        <div class="container text-center">
+
+            <p class="mb-1">
+
+                © 2026 Data Redundancy Removal System. All Rights Reserved.
+
+            </p>
+
+            <p class="mb-1">
+
+                Developed by <strong>Vikash Tiwari</strong>
+
+            </p>
+
+            <p>
+
+                CodeAlpha Cloud Computing Internship Project
+
+            </p>
+
+        </div>
+
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
