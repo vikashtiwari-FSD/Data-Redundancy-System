@@ -15,6 +15,7 @@ from utils.validator import (
     validate_email,
     validate_phone
 )
+from firebase.firebase_operations import save_user_to_firebase
 
 home_bp = Blueprint("home", __name__)
 
@@ -149,6 +150,11 @@ def submit():
     cursor.execute(query, values)
 
     connection.commit()
+    save_user_to_firebase(
+    full_name,
+    email,
+    phone
+)
 
     # -------------------------
     # Save Success Log
