@@ -7,19 +7,24 @@ def search_users(keyword):
 
     cursor = connection.cursor(dictionary=True)
 
-    query = """
-    SELECT *
+    search_keyword = f"%{keyword}%"
+
+    # Search unique users
+    user_query = """
+    SELECT
+        full_name,
+        email,
+        phone,
+        'UNIQUE' AS status,
+        'Stored in database' AS message
     FROM users
     WHERE full_name LIKE %s
        OR email LIKE %s
        OR phone LIKE %s
-    ORDER BY id DESC
     """
 
-    search_keyword = f"%{keyword}%"
-
     cursor.execute(
-        query,
+        user_query,
         (
             search_keyword,
             search_keyword,
@@ -29,7 +34,37 @@ def search_users(keyword):
 
     users = cursor.fetchall()
 
+    # Search submission logs
+    log_query = """
+    SELECT
+    full_name,
+    email,
+    phone,
+    status,
+    message
+FROM submission_logs
+WHERE (
+    full_name LIKE %s
+    OR email LIKE %s
+    OR phone LIKE %s
+)
+AND status <> 'UNIQUE'
+ORDER BY id DESC
+    """
+
+    cursor.execute(
+        log_query,
+        (
+            search_keyword,
+            search_keyword,
+            search_keyword
+        )
+    )
+
+    logs = cursor.fetchall()
+
     cursor.close()
     connection.close()
 
-    return users
+    # Merge both lists
+    return users + logs

@@ -58,9 +58,7 @@ Search Records
         <div class="card-body">
 
             <h4 class="mb-3">
-
                 Search Results
-
             </h4>
 
             {% if results %}
@@ -73,10 +71,11 @@ Search Records
 
                         <tr>
 
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Status</th>
+                            <th>Message</th>
 
                         </tr>
 
@@ -88,13 +87,43 @@ Search Records
 
                         <tr>
 
-                            <td>{{ user.id }}</td>
-
                             <td>{{ user.full_name }}</td>
 
                             <td>{{ user.email }}</td>
 
                             <td>{{ user.phone }}</td>
+
+                            <td>
+
+                                {% if user.status == "UNIQUE" %}
+
+                                    <span class="badge bg-success">
+                                        {{ user.status }}
+                                    </span>
+
+                                {% elif user.status == "DUPLICATE" %}
+
+                                    <span class="badge bg-danger">
+                                        {{ user.status }}
+                                    </span>
+
+                                {% elif user.status == "FALSE_POSITIVE" %}
+
+                                    <span class="badge bg-warning text-dark">
+                                        {{ user.status }}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary">
+                                        {{ user.status }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>{{ user.message }}</td>
 
                         </tr>
 
