@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}
+Search Records
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h2 class="text-center mb-4">
+                Search Existing Records
+            </h2>
+
+            <form action="/search" method="GET">
+
+                <div class="row">
+
+                    <div class="col-md-10">
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="keyword"
+                            placeholder="Search by Name, Email or Phone"
+                            value="{{ keyword }}">
+
+                    </div>
+
+                    <div class="col-md-2 d-grid">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary">
+
+                            Search
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    {% if keyword %}
+
+    <div class="card shadow mt-4">
+
+        <div class="card-body">
+
+            <h4 class="mb-3">
+
+                Search Results
+
+            </h4>
+
+            {% if results %}
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for user in results %}
+
+                        <tr>
+
+                            <td>{{ user.id }}</td>
+
+                            <td>{{ user.full_name }}</td>
+
+                            <td>{{ user.email }}</td>
+
+                            <td>{{ user.phone }}</td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-warning">
+
+                No matching records found.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
